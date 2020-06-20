@@ -3,40 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
+import reducer from './store/reducer';
+import loggerMiddleware from 'redux-logger';
 
-const defaultState = {
-  counter: 0,
-  text: 'Hello'
-};
+const middleware = applyMiddleware(thunkMiddleware, loggerMiddleware);
 
-const reducer = (state = defaultState, action) => {
-
-  console.log('state', state);
-  console.log('action', action);
-
-  switch (action.type) {
-    case 'ADD_COUNT':
-      return {
-        ...state,
-        counter: state.counter + 1
-      };
-
-    case 'SUB_COUNT':
-      return {
-        ...state,
-        counter: state.counter - 1
-      };
-
-    default: return state;
-  }
-
-}
-
-const store = createStore(reducer);
-
-console.log(store);
+const store = createStore(reducer, middleware);
 
 ReactDOM.render(
   <React.StrictMode>

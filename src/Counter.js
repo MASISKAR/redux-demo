@@ -2,39 +2,38 @@ import React from 'react';
 import Screen from './Screen';
 import MinusButton from './MinusButton';
 import PlusButton from './PlusButton';
+import {connect} from 'react-redux';
+import * as actions from './store/actions';
 
 class Counter extends React.Component {
-    state = {
-        count: 0
-    };
-
-    handleMinus = () => {
-        console.log('clicked minus');
-        this.setState((state)=>{
-           return {
-                count: state.count - 1
-            }
-        });
-
-    };
-
-    handlePlus = () => {
-        console.log('clicked plus');
-        this.setState({
-            count: this.state.count + 1
-        });
-
-    };
 
     render() {
+        // console.log('this.props.tasks', this.props.tasks);
         return (
             <div>
-                <MinusButton click={this.handleMinus} />
-                <Screen count={this.state.count} />
-                <PlusButton click={this.handlePlus} />
+                <MinusButton />
+                <Screen  />
+                <PlusButton />
+                <button onClick = {this.props.getTasks}>Get tasks</button>
             </div>
         )
     }
 }
 
-export default Counter;
+const mapStateToProps = (state)=>{
+ return {
+     tasks: state.tasks
+ }
+};
+
+/* const mapDispatchToProps = (dispatch)=>{
+    return {
+        getTasks: ()=> dispatch(actions.getTasks())
+    }
+   }; */
+
+   const mapDispatchToProps = {
+        getTasks: actions.getTasks
+   };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);

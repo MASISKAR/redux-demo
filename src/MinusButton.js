@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from "react-redux";
+import * as actionTypes from './store/actionTypes';
 
 function MinusButton(props){
 
@@ -16,7 +17,7 @@ function MinusButton(props){
 
 const mapDispatchToProps = (dispatch) =>{
     return {
-        onCountSub: ()=> dispatch({type: 'SUB_COUNT'})
+        onCountSub: ()=> dispatch({type: actionTypes.SUB_COUNT})
     };
 };
 
