@@ -11,14 +11,16 @@ import loggerMiddleware from 'redux-logger';
 
 const middleware = applyMiddleware(thunkMiddleware, loggerMiddleware);
 
+/* const rootReducer = combineReducers({
+
+}); */
 const store = createStore(reducer, middleware);
 
 ReactDOM.render(
-  <React.StrictMode>
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>,
+,
   document.getElementById('root')
 );
 
